@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ecommerce-electron
 
 An Electron application with Vue and TypeScript
@@ -32,3 +33,7 @@ $ npm run build:mac
 # For Linux
 $ npm run build:linux
 ```
+=======
+# ecommerce-shop
+一个购物网页
+>>>>>>> 5228d1569b4950d48249fa9fa6e7557abcc5b6bb
