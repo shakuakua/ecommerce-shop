@@ -1,7 +1,9 @@
 <template>
   <NavBar />
+  <!-- 路由到销售功能 -->
+
   <div class="container">
-    <div class="admin-toggle">
+  <div class="admin-toggle">
       <button @click="goToAdmin" class="admin-btn">
         我是销售
       </button>
@@ -29,6 +31,7 @@ import { useRouter } from 'vue-router'
 const products = ref<any[]>([])
 const router = useRouter()
 
+// 挂载生命周期
 onMounted(async () => {
   const { data } = await getProducts()
   products.value = data
@@ -36,7 +39,9 @@ onMounted(async () => {
 function goToAdmin() {
   router.push('/admin')
 }
+// 添加到购物车逻辑
 function addToCart(id: number) {
+  // 如果没有登录过,就要跳转到登录
   if (!localStorage.getItem('token')) {
     router.push('/login')
     return

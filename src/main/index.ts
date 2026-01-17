@@ -18,6 +18,7 @@ function createWindow(): void {
     }
 
   })
+
  // 禁用 CSP 头部，允许外部请求
   mainWindow.webContents.session.webRequest.onHeadersReceived((details, callback) => {
     if (details.responseHeaders) {
@@ -32,7 +33,17 @@ function createWindow(): void {
     }
     callback({ responseHeaders: details.responseHeaders })
   })
-
+  // ========= 生产环境按 F12 打开控制台 =========
+mainWindow.webContents.on('before-input-event', (_, input) => {
+  // F12 打开 DevTools
+  if (input.key === 'F12') {
+    mainWindow.webContents.openDevTools()
+  }
+  // Ctrl+Shift+I 也行
+  if (input.key === 'I' && input.control && input.shift) {
+    mainWindow.webContents.openDevTools()
+  }
+})
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })

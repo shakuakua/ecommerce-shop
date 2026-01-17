@@ -9,6 +9,7 @@ import { productRouter } from './routes/product.js'
 import { orderRouter } from './routes/order.js'
 import { cartRouter } from './routes/cart.js'
 
+// 创建数据库连接池
 export const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -18,6 +19,7 @@ export const pool = mysql.createPool({
   connectionLimit: 10
 })
 
+// 创建Koa应用
 const app = new Koa()
 app.use(cors())
 app.use(bodyParser())
@@ -28,5 +30,6 @@ router.use('/order', orderRouter.routes())
 router.use('/cart', cartRouter.routes())
 app.use(router.routes()).use(router.allowedMethods())
 
+// 启动服务器
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`API on ${port}`))

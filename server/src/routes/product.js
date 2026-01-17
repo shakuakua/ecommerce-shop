@@ -2,6 +2,7 @@ import Router from '@koa/router'
 import { pool } from '../index.js'
 import { auth } from '../middleware/auth.js'
 export const productRouter = new Router()
+// 商品相关接口
 .get('/', async (ctx) => {
   const [rows] = await pool.query('SELECT * FROM product ORDER BY id DESC LIMIT 50')
   ctx.body = rows

@@ -2,9 +2,16 @@ import Router from '@koa/router'
 import { pool } from '../index.js'
 import { auth } from '../middleware/auth.js'
 import nodemailer from 'nodemailer'
+
+// 正确的导入方式 - 使用 default 导出
 const transporter = nodemailer.createTransport({
-  service: 'qq',
-  auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS }
+  host: 'smtp.qq.com',
+  port: 587,
+  secure: false, // 使用TLS，如果用465则设为true
+  auth: {
+    user: process.env.MAIL_USER,  // 你的QQ邮箱地址
+    pass: process.env.MAIL_PASS   // 你的QQ邮箱授权码，不是QQ密码
+  }
 })
 export const orderRouter = new Router()
 .get('/', auth, async (ctx) => {
